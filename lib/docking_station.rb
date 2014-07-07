@@ -14,4 +14,5 @@ class DockingStation
 	def undock(bike)
 		bikes.delete(bike)
 	end
+
 end
