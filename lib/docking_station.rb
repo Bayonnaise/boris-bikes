@@ -10,4 +10,8 @@ class DockingStation
 	def dock(bike)
 		bikes << bike
 	end
+
+	def undock(bike)
+		bikes.delete(bike)
+	end
 end
