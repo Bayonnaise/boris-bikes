@@ -21,7 +21,7 @@ describe 'Van' do
 
 	it 'can return a bike' do
 		boris_van.collect_bike(nagamura, old_street)
-		boris_van.return_bike(nagamura, old_street)
+		boris_van.deliver_bike(nagamura, old_street)
 		expect(boris_van.bikes.count).to eq 0
 		expect(old_street.bikes.count).to eq 1
 	end

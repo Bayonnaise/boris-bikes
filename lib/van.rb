@@ -13,7 +13,7 @@ class Van
 		docking_station.undock(bike)
 	end
 
-	def return_bike(bike, docking_station)
+	def deliver_bike(bike, docking_station)
 		bikes.delete(bike)
 		docking_station.dock(bike)
 	end
@@ -26,7 +26,7 @@ class Van
 
 	def return_repaired(bikes_to_collect, docking_station)
 		bikes_to_collect.each do |bike|
-			return_bike(bike, docking_station) if !bike.broken?
+			deliver_bike(bike, docking_station) if !bike.broken?
 		end
 	end
 end
