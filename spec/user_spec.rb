@@ -20,4 +20,10 @@ describe User do
 		expect(bill.bikes).not_to eq [nagamura]
 	end
 
+	it 'can break a bike' do
+		bill.rent_bike(nagamura)
+		bill.break_bike(nagamura)
+		expect(nagamura.broken?).to eq true
+	end
+
 end

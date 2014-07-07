@@ -15,4 +15,8 @@ class User
 	def return_bike(bike)
 		bikes.delete(bike)
 	end
+
+	def break_bike(bike)
+		bike.break!
+	end
 end
