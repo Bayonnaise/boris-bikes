@@ -16,14 +16,14 @@ class Van
 		bikes.delete(bike)
 	end
 
-	def collect_for_repair(bikes_in_dock)
-		bikes_in_dock.each do |bike|
+	def collect_for_repair(bikes_to_collect)
+		bikes_to_collect.each do |bike|
 			collect_bike(bike) if bike.broken?
 		end
 	end
 
-	def return_repaired(bikes_in_van)
-		bikes_in_van.each do |bike|
+	def return_repaired(bikes_to_collect)
+		bikes_to_collect.each do |bike|
 			return_bike(bike) if !bike.broken?
 		end
 	end
