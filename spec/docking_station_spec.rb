@@ -20,4 +20,6 @@ describe DockingStation do
 		expect(old_street.bikes).not_to eq [nagamura]
 	end
 
+	
+
 end
