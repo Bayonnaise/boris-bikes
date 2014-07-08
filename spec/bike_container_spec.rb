@@ -10,7 +10,7 @@ describe BikeContainer do
 	let (:broken_bike) { Bike.new.break! }
 
 	def fill_container(container)
-		10.times { container.dock(Bike.new) }
+		(container.capacity).times { container.dock(Bike.new) }
 	end
 
 	it 'can dock a bike' do
