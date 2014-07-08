@@ -2,8 +2,8 @@ require 'docking_station'
 require 'bike'
 
 describe DockingStation do
-	let(:nagamura) { Bike.new }
-	let(:old_street) { DockingStation.new }
+	let(:bike) { Bike.new }
+	let(:broken_bike) { Bike.new.break! }
 	let(:station) { DockingStation.new(:capacity => 20) }
 
 	def fill_station(station)
@@ -11,18 +11,18 @@ describe DockingStation do
 	end
 
 	it 'has no bikes when created' do
-		expect(old_street.bikes.count).to eq 0
+		expect(station.bikes.count).to eq 0
 	end
 
 	it 'can dock a bike' do
-		old_street.dock(nagamura)
-		expect(old_street.bikes).to eq [nagamura]
+		station.dock(bike)
+		expect(station.bikes).to eq [bike]
 	end
 
 	it 'can undock a bike' do
-		old_street.dock(nagamura)
-		old_street.undock(nagamura)
-		expect(old_street.bikes).not_to eq [nagamura]
+		station.dock(bike)
+		station.undock(bike)
+		expect(station.bikes.count).to eq 0
 	end
 
 	it "should know when it's full" do
@@ -33,13 +33,12 @@ describe DockingStation do
 	
 	it 'should not accept a bike if the station is full' do
 		fill_station(station)
-		expect(lambda { station.dock(nagamura) }).to raise_error(RuntimeError)
+		expect(lambda { station.dock(bike) }).to raise_error(RuntimeError)
 	end
 
-	it 'should provide a list of available bikes' do
-		working_bike, broken_bike = Bike.new, Bike.new.break!    
-		station.dock(working_bike)
+	it 'should provide a list of available bikes' do   
+		station.dock(bike)
 		station.dock(broken_bike)
-		expect(station.available_bikes).to eq([working_bike])
+		expect(station.available_bikes).to eq([bike])
 	end
 end
