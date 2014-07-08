@@ -14,12 +14,15 @@ describe Van do
 		expect(van.capacity). to eq 20
 	end
 
-	# it 'takes broken bikes from station' do
-	# 	docking_station.dock(bike)
-	# 	docking_station.dock(bike)
-	# 	docking_station.dock(broken_bike)
-	# 	van.takes_broken_bikes
-	# 	expect(van.bikes_count). to eq 1
-	# end
+	it 'takes broken bikes from station' do
+		docking_station.dock(bike)
+		docking_station.dock(bike)
+		docking_station.dock(broken_bike)
+
+		van.takes_broken_bikes(docking_station)
+		
+		expect(van.bikes_count).to eq 1
+		expect(docking_station.bikes_count).to eq 2
+	end
 
 end
