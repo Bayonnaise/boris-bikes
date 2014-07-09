@@ -35,4 +35,25 @@ describe Van do
 		expect(van.bikes).to eq [bike]
 		expect(garage.bikes).to eq [broken_bike]
 	end
+
+	it 'takes fixed bikes from garage' do
+		garage.dock(bike)
+		garage.dock(broken_bike)
+
+		van.takes_fixed_bikes_from(garage)
+		
+		expect(van.bikes).to eq [bike]
+		expect(garage.bikes).to eq [broken_bike]
+	end
+
+	it 'delivers fixed bikes to station' do
+		van.dock(bike)
+		van.dock(broken_bike)
+
+		van.delivers_fixed_bikes_to(docking_station)
+
+		expect(van.bikes).to eq [broken_bike]
+		expect(docking_station.bikes).to eq [bike]
+	end
+
 end
