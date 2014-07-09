@@ -12,5 +12,4 @@ describe DockingStation do
 	it 'has no bikes when created' do
 		expect(station.bikes.count).to eq 0
 	end
-
 end
