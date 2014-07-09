@@ -1,13 +1,18 @@
 require './lib/bike_container'
 require './lib/bike'
+require './lib/van'
 
-class ContainerHolder; include BikeContainer; end
+class ContainerHolder; include BikeContainer; 
+
+end
 
 describe BikeContainer do
 
 	let(:bike) { Bike.new }
 	let (:container) { ContainerHolder.new }
+	let (:van) { Van.new }
 	let (:broken_bike) { Bike.new.break! }
+	let (:broken_bike2) {Bike.new.break! }
 
 	def fill_container(container)
 		(container.capacity).times { container.dock(Bike.new) }
@@ -63,6 +68,12 @@ describe BikeContainer do
 		expect(lambda { container.release("string") }).to raise_error(RuntimeError)
 	end
 
-
+	it "should only release a bike if there's room in the destination" do
+		container.dock(broken_bike)
+		container.dock(broken_bike2)
+		van.capacity = 1
+		expect(lambda { van.takes_broken_bikes_from(container) }).to raise_error(RuntimeError)
+		expect(container.bikes.count).to eq 1
+	end
 	
 end
