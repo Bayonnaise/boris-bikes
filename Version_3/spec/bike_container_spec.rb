@@ -2,13 +2,15 @@ require 'bike_container'
 
 shared_examples 'a bike container' do
 	let(:container) { described_class.new }
-	let(:bike) { double :bike }
+	let(:bike) { double :bike, fix!: true }
+	let(:broken) { double :bike, broken?: true, fix!: true }
+	let(:working) { double :bike, broken?: false, fix!: true }
 
 	def fill_container
 		container.capacity.times { container.accept(bike) }
 	end
 
-	it 'should accept a bike' do 
+	it 'should accept a bike' do
 		container.accept(bike)
 		expect(container.bikes).to eq [bike]
 	end
@@ -31,20 +33,16 @@ shared_examples 'a bike container' do
 	end
 
 	it 'should not release a bike if empty' do
-		expect(lambda { container.release(bike)}).to raise_error(RuntimeError)
+		expect(lambda { container.release(bike) }).to raise_error(RuntimeError)
 	end
 
 	it 'provides a list of available bikes' do
-		broken = double :bike, broken?: true
-		working = double :bike, broken?: false
 		container.accept(broken)
 		container.accept(working)
 		expect(container.working_bikes).to eq [working]	
 	end
 
 	it 'provides a list of broken bikes' do
-		broken = double :bike, broken?: true
-		working = double :bike, broken?: false
 		container.accept(broken)
 		container.accept(working)
 		expect(container.broken_bikes).to eq [broken]

@@ -9,15 +9,11 @@ module BikeContainer
 	end
 
 	def empty?
-		bike_count == 0
+		bikes.count == 0
 	end
 
 	def full?
-		bike_count == capacity
-	end
-
-	def bike_count
-		@bikes.count
+		bikes.count == capacity
 	end
 
 	def accept(bike)
