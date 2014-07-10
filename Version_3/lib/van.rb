@@ -8,6 +8,18 @@ class Van
 		@capacity = options.fetch(:capacity, DEFAULT_CAPACITY)
 		@bikes = []
 	end
+
+	def self.large
+		new(capacity: 30)
+	end
+
+	def self.medium
+		new(capacity: 20)
+	end
+
+	def self.small
+		new(capacity: 10)
+	end
 	
 	def collect_bike_from(container, bike)
 		container.release(bike) if !full?
